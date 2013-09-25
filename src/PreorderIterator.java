@@ -14,10 +14,19 @@ public class PreorderIterator implements Iterator<Node> {
     }
 
     public Node next() {
-	// To be completed
+	Node temp = s.pop();
+
+	if (temp.left != null) {
+	    s.push(temp.left);
+	}
+	if (temp.right != null) {
+	    s.push(temp.right);
+	}
+
+	return temp;
     }
 
     public boolean hasNext() {
-	// To be completed
+	return next() != null;
     }
 }

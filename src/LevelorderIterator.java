@@ -4,7 +4,9 @@ public class LevelorderIterator implements Iterator<Node> {
     protected Queue<Node> q;
 
     public LevelorderIterator(Node tree) {
-	// To be completed
+	q = new Queue<Node>();
+	if (tree != null)
+	    q.enqueue(tree);
     }
 
     public void remove() {
@@ -12,10 +14,19 @@ public class LevelorderIterator implements Iterator<Node> {
     }
 
     public Node next() {
-	// To be completed
+	Node temp = q.dequeue();
+
+	if (temp.left != null) {
+	    q.enqueue(temp.left);
+	}
+	if (temp.right != null) {
+	    q.enqueue(temp.right);
+	}
+
+	return temp;
     }
 
     public boolean hasNext() {
-	// To be completed
+	return next() != null;
     }
 }
