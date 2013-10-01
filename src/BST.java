@@ -97,7 +97,10 @@ public class BST {
      * Remove node with given key from BST
      */
     public void remove(int key) {
-	root = findNode(root, key);
+	if (root != null && contains(key)) {
+	    root = findNode(root, key);
+	    size--;
+	}
     } // dummy code
 
     public Node findNode(Node x, int key) {
@@ -117,7 +120,6 @@ public class BST {
     }
 
     public Node removeNode(Node x) {
-	size--;
 	Node temp;
 	//Children on one side?
 	if (x.left != null) {

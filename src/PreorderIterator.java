@@ -16,17 +16,17 @@ public class PreorderIterator implements Iterator<Node> {
     public Node next() {
 	Node temp = s.pop();
 
-	if (temp.left != null) {
-	    s.push(temp.left);
-	}
 	if (temp.right != null) {
 	    s.push(temp.right);
+	}
+	if (temp.left != null) {
+	    s.push(temp.left);
 	}
 
 	return temp;
     }
 
     public boolean hasNext() {
-	return next() != null;
+	return !s.isEmpty();
     }
 }

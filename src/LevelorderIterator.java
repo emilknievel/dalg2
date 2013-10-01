@@ -27,6 +27,6 @@ public class LevelorderIterator implements Iterator<Node> {
     }
 
     public boolean hasNext() {
-	return next() != null;
+	return !q.isEmpty();
     }
 }
