@@ -97,14 +97,51 @@ public class BST {
      * Remove node with given key from BST
      */
     public void remove(int key) {
-	return;
+	root = findNode(root, key);
     } // dummy code
+
+    public Node findNode(Node x, int key) {
+        // Is the node to the left of x?
+	if (key < x.key) {
+	    findNode(x.left, key);
+	}
+	// Is the node to the right of x?
+	else if (key > x.key) {
+	    findNode(x.right, key);
+	}
+	// Is the current node the node to be removed?
+	else if (key == x.key) {
+	    x = removeNode(x);
+	}
+	return x;
+    }
+
+    public Node removeNode(Node x) {
+	if (x.left != null) {
+	    Node temp = leftMax(x);
+
+	    remove(leftMax(x).key);
+
+	    temp.left = x.left;
+	    if (x.right != null) {
+		temp.right = x.right;
+	    }
+	    x = temp;
+	}
+	else if (x.right != null) {
+	    x = x.right;
+	} else {
+	    // Just remove x if it is a leaf
+	    x = null;
+	}
+	return x;
+    }
 
     /**
      * Returns the rightmost node of the left sub-tree
      */
     public Node leftMax(Node x) {
-	temp = x.left;
+	Node temp = x.left;
 	while (temp.right != null) {
 	    temp = temp.right;
 	}
