@@ -103,11 +103,11 @@ public class BST {
     public Node findNode(Node x, int key) {
         // Is the node to the left of x?
 	if (key < x.key) {
-	    findNode(x.left, key);
+	    x.left = findNode(x.left, key);
 	}
 	// Is the node to the right of x?
 	else if (key > x.key) {
-	    findNode(x.right, key);
+	    x.right = findNode(x.right, key);
 	}
 	// Is the current node the node to be removed?
 	else if (key == x.key) {
@@ -117,24 +117,28 @@ public class BST {
     }
 
     public Node removeNode(Node x) {
+	size--;
+	Node temp;
+	//Children on one side?
 	if (x.left != null) {
-	    Node temp = leftMax(x);
-
-	    remove(leftMax(x).key);
-
-	    temp.left = x.left;
+	    // Are there children on both sides?
 	    if (x.right != null) {
+		temp = leftMax(x);
+		temp.left = findNode(x.left, temp.key);
 		temp.right = x.right;
+		return temp;
 	    }
-	    x = temp;
+	    temp = x.left;
+	    return temp;
 	}
+
+	// Children on the right side
 	else if (x.right != null) {
-	    x = x.right;
+	    temp = x.right;
+	    return temp;
 	} else {
-	    // Just remove x if it is a leaf
-	    x = null;
+	    return null;
 	}
-	return x;
     }
 
     /**
