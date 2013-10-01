@@ -100,6 +100,17 @@ public class BST {
 	return;
     } // dummy code
 
+    /**
+     * Returns the rightmost node of the left sub-tree
+     */
+    public Node leftMax(Node x) {
+	temp = x.left;
+	while (temp.right != null) {
+	    temp = temp.right;
+	}
+	return temp;
+    }
+
     public PreorderIterator preorder() {
 	return new PreorderIterator(root);
     }
